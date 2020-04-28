@@ -6,16 +6,16 @@ CREATE TABLE web.Users
 	password_hash				VARCHAR(128)		NOT NULL,
 	password_salt				VARCHAR(128)		NOT NULL,
 	password_recovery_token			VARCHAR(30)				UNIQUE,
-	RegistrationToken		VARCHAR(255)  ,
+	RegistrationToken			VARCHAR(255)  ,
 	attempts_count				TINYINT			NOT NULL	DEFAULT(0)	CHECK(attempts_count>=0),
 	blocked					BIT			NOT NULL	DEFAULT(0),
 	deleted					BIT			NOT NULL	DEFAULT(0)
 );
 CREATE TABLE web.Roles
 (
-	Id				BIGINT			PRIMARY KEY IDENTITY(1,1),
+	Id			BIGINT			PRIMARY KEY IDENTITY(1,1),
 	Role			VARCHAR(30)		NOT NULL,
-	Description		VARCHAR(158)	DEFAULT('Your permissions'),
+	Description		VARCHAR(158)		DEFAULT('Your permissions'),
 	UserId			BIGINT			NOT NULL,
 	CONSTRAINT FK_Roles_UserId FOREIGN KEY (UserId) REFERENCES web.Users(Id) ON DELETE CASCADE ON UPDATE CASCADE
 )
@@ -57,12 +57,12 @@ CREATE TABLE web.Tags
 (
 	Id				BIGINT			PRIMARY KEY IDENTITY(1,1),
 	Tag				VARCHAR(25)		NOT NULL,
-	ImageId			BIGINT			NOT NULL,
+	ImageId				BIGINT			NOT NULL,
 	CONSTRAINT FK_Tags_ImageId FOREIGN KEY (ImageId) REFERENCES web.Images(Id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 CREATE TABLE web.Categories
 (
-	Id				BIGINT			PRIMARY KEY IDENTITY(1,1),
+	Id			BIGINT			PRIMARY KEY IDENTITY(1,1),
 	Category		VARCHAR(25)		NOT NULL,
 	Title			VARCHAR(60)		NOT NULL
 )
